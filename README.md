@@ -2,49 +2,43 @@ The content below is an example project proposal / requirements document. Replac
 
 (___TODO__: your project name_)
 
-# Shoppy Shoperson 
+# Capsule Collect 
 
 ## Overview
 
 (___TODO__: a brief one or two paragraph, high-level description of your project_)
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Capsule Collect is a collector game where the player use coins to buy capsules that will give you a random piece of an object. The pieces can be combined into a whole toy object. Players have to register and login. The player has pets that can be fed toys to grow up. All pieces and toy objects the player owns are shown on the collections page. 
+Players can play a simple game like rock-paper-scissors to earn coins. 
 
 
 ## Data Model
 
 (___TODO__: a description of your application's data and their relationships to each other_) 
 
-The application will store Users, Lists and Items
+The application will store Users, Pet, Pieces, and Toy:
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* users has a pet (by embedding)
+* users can have multiple pieces and toys (by embedding)
 
 (___TODO__: sample documents_)
 
-An Example User:
+An Example User with Embedded Items:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
-}
-```
-
-An Example List with Embedded Items:
-
-```javascript
-{
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+username: 
+hash: 
+coins: 100,
+pieces: [
+    { name: "cactus", quantity: "5"},
+    { name: "ramen", quantity: "2"},
+],
+toys: [
+    { name: "cactus", quantity: "0"},
+    { name: "ramen", quantity: "1"},
+],
+pets: { name: "bearwood", level: 1, growth: 50}
 }
 ```
 
@@ -57,23 +51,31 @@ An Example List with Embedded Items:
 
 (___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
 
-/list/create - page for creating a new shopping list
+/ - home page for obtaining capsule from vending machine
 
-![list create](documentation/list-create.png)
+![home](documentation/home.png)
 
-/list - page for showing all shopping lists
+/collection-pieces - page for showing all pieces
 
-![list](documentation/list.png)
+![collection piece](documentation/pieces.png)
 
-/list/slug - page for showing specific shopping list
+/collection-toys - page for showing all toys
 
-![list](documentation/list-slug.png)
+![list](documentation/toys.png)
+
+/yard - page for showing and feeding pet
+
+![list](documentation/yard.png)
+
+/game - page for playing game to earn coins
+
+![list](documentation/yard.png)
 
 ## Site map
 
 (___TODO__: draw out a site map that shows how pages are related to each other_)
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![site map](documentation/map.png)
 
 ## User Stories or Use Cases
 
@@ -81,10 +83,11 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can use coins to spin the vending machine to get capsule
+4. as a user, I can view all the pieces and toys obtained
+5. as a user, I can combine pieces for form toys
+6. as a user, I can view and feed the pet to level it up in the yard
+7. as a user, I can play a game of to obtain coins
 
 ## Research Topics
 
@@ -92,14 +95,10 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+* (2 points) CSS framework
+    * use Bootstrap to implement to implement design framework
+* (3 points) Perform client side form validation using a JavaScript library
+    * if you try to feed a pet at level 5, an error message will appear
 
 10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
 
@@ -113,5 +112,5 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 (___TODO__: list any tutorials/references/etc. that you've based your code off of_)
 
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+
 
