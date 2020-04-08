@@ -1,3 +1,54 @@
 h1 {
   size: 30px;
+  text-align: center;
+}
+
+.topbar {
+  padding: 20px;
+  font-size: 15px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: #6699cc;
+}
+
+.topbar em {
+  float: right;
+	margin-right: 50px;
+}
+
+.main {
+  margin-top: 60px;
+}
+
+.footernav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #6699cc;
+}
+
+.footernav ul {
+  list-style-type: none;
+}
+
+.footernav li {
+  float: left;
+}
+
+.footernav a {
+  display: block;
+  text-align: center;
+  padding: 20px 30px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.home {
+  text-align: center;
+  vertical-align: middle;
+}
+
+tr td {
+	padding: 5px 30px;
 }
