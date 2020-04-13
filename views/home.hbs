@@ -1,12 +1,15 @@
+{{> navbar}}
+
 <div class="home">
 <img src="img/gashapon.png" alt="gashapon" style="width:250px;height:300px;">
 
 <p>Click spin to get new piece</p>
 
-<form method="POST" action="">
-	<input type="submit" value="Spin">
+<form method="POST" action="/home">
+	<button type="submit">Spin</button>
 </form>
 
-{{randPiece.msg}}{{randPiece.name}}
+<p>{{msg}}</p>
 
 </div>
+

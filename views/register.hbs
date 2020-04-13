@@ -1,0 +1,10 @@
+<h2>Register</h2>
+
+{{> messages}}
+<form action="/register" method="POST">
+	Username: <input type="text" name="username">
+	Password: <input type="text" name="password">
+	Confirm Password: <input type="text" name="password2">
+	<input type="submit" value="Register">
+</form>
+<p>Have an account? <a href="/login">Login</a></p>

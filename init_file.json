@@ -1,0 +1,12 @@
+{
+	"coins": 100,
+	"pieces": [{"name":"cactus", "quantity":0},
+						 {"name":"teddy", "quantity":0},
+						 {"name":"fishy", "quantity":0},
+						 {"name":"duckie", "quantity":0}],
+	"toys": [{"name":"cactus", "quantity":0},
+					 {"name":"teddy", "quantity":0},
+					 {"name":"fishy", "quantity":0},
+					 {"name":"duckie", "quantity":0}],
+	"pets":{"name":"myPet", "level":1, "growth":0}
+}

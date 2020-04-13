@@ -49,6 +49,6 @@ h1 {
   vertical-align: middle;
 }
 
-tr td {
+tr, td {
 	padding: 5px 30px;
 }

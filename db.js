@@ -6,7 +6,6 @@ const Piece = new mongoose.Schema({
   quantity: {type: Number, required: true},
 });
 
-
 const Toy = new mongoose.Schema({
   name: {type: String, required: true},
   quantity: {type: Number, required: true},
@@ -19,6 +18,9 @@ const Pet = new mongoose.Schema({
 });
 
 const User = new mongoose.Schema({
+	username: {type: String, required: true},
+	hash: {type: String, required: true},
+	coins: {type: Number, required: true},
   pieces: [Piece],
   toys: [Toy],
   pets: Pet
@@ -26,6 +28,7 @@ const User = new mongoose.Schema({
 
 mongoose.model('User', User);
 mongoose.model('Piece', Piece);
+mongoose.model('Toy',Toy);
 
 /***** from hw06 *****/
 let dbconf;
