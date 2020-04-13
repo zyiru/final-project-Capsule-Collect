@@ -1,3 +1,7 @@
+<h2> Collection: Pieces</h2>
+
+{{> navbar}}
+
 <div class="collection-nav">
 <ul>
 	<li><a href="/collection/pieces">Pieces</a></li>
@@ -7,7 +11,7 @@
 
 
 <table>
-	{{#each collection}}
+	{{#each user.pieces}}
 	<tr>
 		<td>{{name}}</td>
 		<td>{{quantity}}</td>

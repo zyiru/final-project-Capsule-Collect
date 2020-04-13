@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 //load user model
 const User = mongoose.model('User');
 
+// passport authentication based off of:
+// https://github.com/bradtraversy/node_passport_login
 module.exports = function(passport){
     passport.use(
 	new LocalStrategy({usernameField: 'username'}, (username, password, done)=>{

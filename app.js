@@ -44,17 +44,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //global variables
 app.use((req, res, next)=>{
-				res.locals.error_msg = req.flash('error_msg');
-				res.locals.success_msg = req.flash('success_msg');
+				res.locals.msg = req.flash('msg');
 				res.locals.error = req.flash('error');
 				next();
 				});
 
-const Piece = mongoose.model('Piece');
-const Toy = mongoose.model('Toy');
 const User = mongoose.model('User');
 
-//const username;
 
 //register and login
 app.get('/', (req, res) => {
@@ -66,6 +62,9 @@ app.get('/register',(req,res)=>{
 });
 app.post('/register',(req,res)=>{
     console.log(req.body);
+				 
+		// checking for and displaying errors when registering based off of:
+		// https://github.com/bradtraversy/node_passport_login
     const { username, password, password2 } = req.body;
     let errors = [];
     
@@ -80,12 +79,9 @@ app.post('/register',(req,res)=>{
 	errors.push({msg: 'Password should be at least 6 characters'});
     }
     
-    console.log(errors);
-    
     if(errors.length > 0){
 	res.render('register', {errors});
     }else{
-	//valid
 	User.findOne({username:username})
 	    .then(user => {
 		if(user){
@@ -105,7 +101,7 @@ app.post('/register',(req,res)=>{
 			    //save new user
 			    newUser.save()
 						.then(user => {
-							req.flash('success_msg', 'You have successfully registered');
+							req.flash('msg', 'You have successfully registered');
 							res.redirect('/login')
 						})
 				.catch(err => console.log(err));
@@ -130,73 +126,25 @@ app.post('/login',(req, res, next)=>{
 
 //after loging in
 app.get('/home', ensureAuthenticated, (req, res) => {
-    //console.log(req.user);
-    res.render('home',{msg});
+		res.render('home',{user:req.user});
 });
 
 
-let randPiece={};
-let msg;
 app.post('/home', (req, res)=>{
-    User.aggregate([{$match: {username:username}}, {"$unwind":"$pieces"},{$sample:{size:1}}], (err, result)=>{
-	User.updateOne({username:username, "pieces.name":result[0].pieces.name}, {$inc: {"pieces.$.quantity": 1}}, (err, r)=>{
-	    randPiece = result[0];
-	    msg = `You got a ${result[0].pieces.name} piece`;
+    User.aggregate([{$match: {username:req.user.username}}, {"$unwind":"$pieces"},{$sample:{size:1}}], (err, result)=>{
+	User.updateOne({username:req.user.username, "pieces.name":result[0].pieces.name}, {$inc: {"pieces.$.quantity": 1}}, (err, r)=>{
+								 req.flash('msg',`You got a ${result[0].pieces.name} piece`);
+								 res.redirect('/home');
 	});
     });
-    /*
-      Piece.aggregate([{$sample:{size:1}}], (err, result)=>{
-      Piece.update({name: result[0].name}, {$inc: {quantity: 1}}, (err, r)=>{
-      console.log(r);
-      });
-      randPiece = result[0];
-      msg = 'You got a '+result[0].name+' piece';
-      });*/
-    res.redirect('/home');
 });
 
-/*
-  app.post('/',(req,res)=>{
-  Piece.aggregate([{$sample:{size:1}}], (err, result)=>{
-  Piece.update({name: result[0].name}, {$inc: {quantity: 1}});
-  console.log(result[0]);
-  });
-  });
-*/
-app.get('/collection/pieces', (req,res) => {
-    User.find({username:username},(err, result)=>{
-	if(result.length ===0 || err){
-	    res.send('User not found');
-	}else{
-	    const pieces = result[0].pieces;
-	    console.log(pieces);
-	    res.render('collection',{collection: pieces});
-	}
-    });
+app.get('/collection/pieces', ensureAuthenticated, (req,res) => {
+	    res.render('collection-pieces',{user: req.user});
 });
-/*
-  Piece.find({}, (err, result)=>{
-  res.render('collection', {collection: result});
-  })
-  });
 
-  app.get('/collection/pieces', (req,res) => {
-  Toy.find({}, (err, result)=>{
-  res.render('collection', {collection: result});
-  })
-  });*/
-
-app.get('/collection/pieces', (req,res) => {
-    User.find({username:username},(err, result)=>{
-	if(result.length ===0 || err){
-	    res.send('User not found');
-	}else{
-	    console.log(err);
-	    const toys = result[0].toys;
-	    console.log(toys);
-	    res.render('collection',{collection: toys});
-	}
-    });
+app.get('/collection/toys', ensureAuthenticated, (req,res) => {
+	    res.render('collection-toys',{user: req.user});
 });
 
 app.listen(3000);
