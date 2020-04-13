@@ -80,10 +80,8 @@ pets: { name: "bearwood", level: 1, growth: 50}
     * I'm going to be using passport for user authentication
 * (2 points) CSS framework
     * use Bootstrap to implement to implement design framework
-* (3 points) Perform client side form validation using a JavaScript library
-    * if you try to feed a pet at level 5, an error message will appear
-
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+* (2 points) Use connect-flash library
+    * use flash messages for errors that occur during login and registration
 
 
 ## [Link to Initial Main Project File](app.js) 

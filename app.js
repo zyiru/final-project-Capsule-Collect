@@ -1,13 +1,16 @@
 require('./db');
 
 const passport = require('passport');
-require('./passport')(passport);
+require('./config/passport')(passport);
+
+const {ensureAuthenticated} = require('./config/auth');
 
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -19,6 +22,9 @@ const sessionOptions = {
     saveUninitialized: true
 }
 app.use(session(sessionOptions));
+
+//connect flash
+app.use(flash());
 
 //passport middleware
 app.use(passport.initialize());
@@ -36,14 +42,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+//global variables
+app.use((req, res, next)=>{
+				res.locals.error_msg = req.flash('error_msg');
+				res.locals.success_msg = req.flash('success_msg');
+				res.locals.error = req.flash('error');
+				next();
+				});
+
 const Piece = mongoose.model('Piece');
 const Toy = mongoose.model('Toy');
 const User = mongoose.model('User');
-
-app.use((req, res, next)=>{
-				res.locals.error = req.session.errors;
-				next();
-				});
 
 //const username;
 
@@ -95,7 +104,10 @@ app.post('/register',(req,res)=>{
 			    
 			    //save new user
 			    newUser.save()
-				.then(user => res.redirect('/login'))
+						.then(user => {
+							req.flash('success_msg', 'You have successfully registered');
+							res.redirect('/login')
+						})
 				.catch(err => console.log(err));
 			}
 		    });
@@ -111,13 +123,14 @@ app.get('/login',(req,res)=>{
 app.post('/login',(req, res, next)=>{
 	passport.authenticate('local',{
 		successRedirect: '/home',
-		failureRedirect: '/login'
+		failureRedirect: '/login',
+		failureFlash: true
 	})(req, res, next);
 });
 
 //after loging in
-app.get('/home', (req, res) => {
-    console.log(randPiece);
+app.get('/home', ensureAuthenticated, (req, res) => {
+    //console.log(req.user);
     res.render('home',{msg});
 });
 
