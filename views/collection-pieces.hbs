@@ -9,14 +9,26 @@
 </ul>
 </div>
 
+<div class="fivemsg">
+</div>
 
-<table>
-	{{#each user.pieces}}
+<table class="table">
+	<thead>
 	<tr>
-		<td>{{name}}</td>
-		<td>{{quantity}}</td>
-		<td>Combine</td>
+		<th scope="col">Name</th>
+		<th scope="col">Quantity</th>
+		<th scope="col"></th>
+	</tr>
+	</thead>
+	{{#each user.pieces}}
+	<tr id={{name}}>
+		<td class="name">{{name}}</td>
+		<td class="quantity">{{quantity}}</td>
+		<td><button type="button" class="btn btn-secondary combine" onClick="makeToy(this)">Combine</button></td>
+
 	</tr>
 	{{/each}}
 </table>
+
+<script src="../clientjs/combine.js"></script>
 

@@ -1,12 +1,16 @@
-<div class="topbar">
-        <a href="/home">HOME</a>
-        <em> Coins: {{user.coins}}</em>
-</div>
+<header class="fixed-top bg-light">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="nav navbar-nav"><a href="/home">HOME</a></div>
+        <div class="nav navbar-nav navbar-right" id="coins"> Coins: {{user.coins}}</div>
+</nav>
+</header>
 
-<div class="footernav">
-        <ul>
-          <li><a href="/collection/pieces">Collection</a></li>
-          <li><a href="/yard">Yard</a></li>
-          <li><a href="/game">Game</a></li>
+<footer class="footer fixed-bottom bg-light">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav navbar-nav list-inline">
+          <li class="list-inline-item"><a class="navbar-brand" href="/collection/pieces">Collection</a></li>
+          <li class="list-inline-item"><a class="navbar-brand" href="/yard">Yard</a></li>
+          <li class="list-inline-item"><a class="navbar-brand" href="/game">Game</a></li>
         </ul>
-</div>
+</nav>
+</footer>

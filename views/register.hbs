@@ -1,10 +1,17 @@
-<h2>Register</h2>
+<form class="text-center border border-light p-5" action="/register" method="POST">
+  <h2 class="text-center mb-3">Register</h2>
 
-{{> messages}}
-<form action="/register" method="POST">
-	Username: <input type="text" name="username">
-	Password: <input type="text" name="password">
-	Confirm Password: <input type="text" name="password2">
-	<input type="submit" value="Register">
-</form>
+  {{> messages}}
+    <div class="form-group row">
+	Username: <input type="text" name="username" class="form-control">
+    </div>
+    <div class="form-group row">
+	Password: <input type="text" name="password" class="form-control">
+    </div>
+    <div class="form-group row">
+	Confirm Password: <input type="text" name="password2" class="form-control">
+    </div>
+	<button type="submit" class="btn btn-info">Register</button>
+
 <p>Have an account? <a href="/login">Login</a></p>
+</form>

@@ -1,15 +1,20 @@
 {{> navbar}}
 
-<div class="home">
+<div class="row align-items-center">
+<div class="col-6">
 <img src="img/gashapon.png" alt="gashapon" style="width:250px;height:300px;">
 
-<p>Click spin to get new piece</p>
-
-<form method="POST" action="/home">
-	<button type="submit">Spin</button>
-</form>
-
-<p>{{>messages}}</p>
-
+<div id="card">
+	<p>Click spin to get new piece</p>
+	<p>Each spin requires 10 coins</p>
 </div>
 
+<form method="POST" action="/home">
+	<button id="spin" type="submit">Spin</button>
+</form>
+
+{{>messages}}
+
+</div>
+</div>
+<!-- script src="../clientjs/spin.js"></script -->
