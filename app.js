@@ -51,7 +51,6 @@ app.use((req, res, next)=>{
 
 const User = mongoose.model('User');
 
-
 //register and login
 app.get('/', (req, res) => {
     res.render('welcome');
@@ -80,7 +79,7 @@ app.post('/register',(req,res)=>{
     if(errors.length > 0){
       res.render('register', {errors});
     }else{
-      User.findOne({username:req.user.username})
+      User.findOne({username:username})
         .then(user => {
             if(user){
             errors.push({msg:'Username already exists'});
@@ -90,6 +89,7 @@ app.post('/register',(req,res)=>{
             fs.readFile('init_file.json', 'utf8', (err,data)=>{
                 if(!err){
                 const d = JSON.parse(data);
+								console.log(d);
                 const newUser = new User({username:username, hash:password, coins:d.coins, pieces:d.pieces, toys:d.toys, pets:d.pets});
                 console.log('new user ',newUser);
 
@@ -130,9 +130,9 @@ app.post('/home', ensureAuthenticated, (req, res)=>{
         User.updateOne({username:req.user.username, "pieces.name":result[0].pieces.name}, {$inc: {"pieces.$.quantity": 1, "coins": -10}}, (err, r)=>{
             req.flash('msg',`You got a ${result[0].pieces.name} piece`);
             res.redirect('/home');
-            });
-        });
-    });
+					});
+		});
+});
 
 app.get('/collection/pieces', ensureAuthenticated, (req,res) => {
     res.render('collection-pieces',{user: req.user});
@@ -158,7 +158,7 @@ app.post('/collection/toys', ensureAuthenticated, (req,res)=>{
       else {res.json({success: true, result: r})}
     });
   }else{
-    User.updateOne({username:req.user.username, "toys.name":toy},{$inc: {/*"toys.$.quantity":-1,*/ "pets.growth" :10}}, (err,r)=>{
+    User.updateOne({username:req.user.username, "toys.name":toy},{$inc: {"toys.$.quantity":-1, "pets.growth" :10}}, (err,r)=>{
       if(err) {res.status(500).json({success:false});}
       else {res.json({success: true, result: r})}
     });

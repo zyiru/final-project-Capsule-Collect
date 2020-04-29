@@ -9,6 +9,7 @@ const Piece = new mongoose.Schema({
 const Toy = new mongoose.Schema({
   name: {type: String, required: true},
   quantity: {type: Number, required: true},
+	img: String
 });
 
 const Pet = new mongoose.Schema({

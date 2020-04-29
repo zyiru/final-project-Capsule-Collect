@@ -14,6 +14,7 @@
 <table class="table">
 	<thead>
 	<tr>
+	  <th scope="col"></th>
 		<th scope="col">Name</th>
 		<th scope="col">Quantity</th>
 		<th scope="col"></th>
@@ -21,6 +22,7 @@
 	</thead>
 	{{#each user.toys}}
 	<tr id={{name}}>
+		<td class="icon"></td>
 		<td class="name">{{name}}</td>
 		<td class="quantity">{{quantity}}</td>
 		<td><button type="button" class="btn btn-secondary feed" onClick="feed(this)">Feed</button></td>

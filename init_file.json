@@ -4,9 +4,9 @@
 						 {"name":"teddy", "quantity":0},
 						 {"name":"fishy", "quantity":0},
 						 {"name":"duckie", "quantity":0}],
-	"toys": [{"name":"cactus", "quantity":0},
-					 {"name":"teddy", "quantity":0},
-					 {"name":"fishy", "quantity":0},
-					 {"name":"duckie", "quantity":0}],
+	"toys": [{"name":"cactus", "quantity":0, "img":"https://www.pngitem.com/pimgs/m/184-1848938_transparent-cute-cactus-png-transparent-cactus-clipart-png.png"},
+		{"name":"teddy", "quantity":0, "img": "https://cdn.clipart.email/d84fc614089be87892bf840fde31b286_download-free-png-gummy-bear-clipart-transparent-background-cute-_820-1034.jpeg"},
+		{"name":"fishy", "quantity":0, "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSG0zrWv5Oo0qts9GEcY_muMtdMEr0HKGhg2FV7b10ja4GahUXD&usqp=CAU"},
+	{"name":"duckie", "quantity":0, "img": "https://i.pinimg.com/originals/2a/87/13/2a87131ca6521858d1e809b91e1fbaed.jpg"}],
 	"pets":{"name":"myPet", "level":1, "growth":0}
 }

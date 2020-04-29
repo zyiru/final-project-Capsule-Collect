@@ -36,24 +36,6 @@ function compMove(){
   return cm;
 }
 
-function compare(cm, pm, end){
-  if(pm === 'rock'){
-    if(cm === 0)  return 'tie';
-    else if(cm === 1) return 'loss';
-    else{
-      end('win');
-    }
-  }else if(pm === 'paper'){
-    if(cm === 0) end('win');
-    else if(cm === 1) end('tie');
-    else end('loss');
-  }else{
-    if(cm === 0) end('loss');
-    else if(cm === 1) end('win');
-    else end('tie');
-  }
-}
-
 function end(result){
   const game = document.getElementById('compmove');
   const res = document.createElement('div');
@@ -72,11 +54,29 @@ function end(result){
 	
   game.appendChild(res);
   const btn = document.getElementById('replay');
-  btn.classList.toggle('d-none');  
+  btn.classList.toggle('d-none');
   const paperMoves = document.getElementById('moves');
   paperMoves.classList.toggle('d-none');
   btn.addEventListener('click', replay);
   setTimeout(getUserData, 200);
+}
+
+function compare(cm, pm, end){
+  if(pm === 'rock'){
+    if(cm === 0)  return 'tie';
+    else if(cm === 1) return 'loss';
+    else{
+      end('win');
+    }
+  }else if(pm === 'paper'){
+    if(cm === 0) end('win');
+    else if(cm === 1) end('tie');
+    else end('loss');
+  }else{
+    if(cm === 0) end('loss');
+    else if(cm === 1) end('win');
+    else end('tie');
+  }
 }
 
 function replay(){

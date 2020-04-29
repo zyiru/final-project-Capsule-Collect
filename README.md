@@ -86,7 +86,7 @@ pets: { name: "bearwood", level: 1, growth: 50}
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
-* (2 points) CSS framework
+* (3 points) CSS framework
     * use Bootstrap to implement to implement design framework
 * (1 points) Use connect-flash library
     * use flash messages for errors that occur during login and registration
