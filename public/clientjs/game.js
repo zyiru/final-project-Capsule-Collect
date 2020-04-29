@@ -1,9 +1,23 @@
-function play(btn){
-  const div = document.querySelector('.playlabel');
-  div.classList.add('d-none');
-  const cm = compMove();
-  const pm = btn.id;
-  compare(cm, pm, end);
+function getUserData(){
+  fetch('/user', {method: 'GET'})
+    .then(
+      function(response){
+        if(response.status >= 200 && response.status < 400){
+          response.json().then(function(data) {
+            document.getElementById('coins').innerHTML = `Coins: ${data.coins}`;
+          });
+        }
+      }
+    )
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+
+function updateData(){
+  fetch('/game', {method: 'POST'})
+    .then(function(responses){return;})
+    .catch(function(error){console.log(error);});
 }
 
 function compMove(){
@@ -80,26 +94,11 @@ function replay(){
   div.classList.toggle('d-none');
 }
 
-function updateData(){
-  fetch('/game', {method: 'POST'})
-    .then(function(responses){return;})
-    .catch(function(error){console.log(error);});
-}
-
-
-function getUserData(){
-  fetch('/user', {method: 'GET'})
-    .then(
-      function(response){
-        if(response.status >= 200 && response.status < 400){
-          response.json().then(function(data) {
-            document.getElementById('coins').innerHTML = `Coins: ${data.coins}`;
-          });
-        }
-      }
-    )
-    .catch(function(error) {
-      console.log(error);
-    });
+function play(btn){
+  const div = document.querySelector('.playlabel');
+  div.classList.add('d-none');
+  const cm = compMove();
+  const pm = btn.id;
+  compare(cm, pm, end);
 }
 
