@@ -186,6 +186,10 @@ app.get('/yard', ensureAuthenticated, (req, res)=>{
   res.render('yard', {user:req.user});
 });
 
+app.post('/yard', ensureAuthenticated, (req, res)=>{
+  res.redirect('/collection/toys');
+});
+
 app.get('/user', ensureAuthenticated, (req, res)=>{
   res.json(req.user);
 });

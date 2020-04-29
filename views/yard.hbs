@@ -2,11 +2,14 @@
 
 <div class="body text-center">
 <div id="pet">
-	<div class="info border border-light float-right">
-		Level: {{user.pets.level}}
+	<div class="info border border-light float-right text-left">
+		Name: {{user.pets.name}} </br>
+		Level: {{user.pets.level}} </br>
 		Growth: {{user.pets.growth}}/100
+		<form method="POST" style="bottom:100px; right: 100px">
+			<button type="submit" class="btn btn-secondary">Feed</button>
+		</form>
 	</div>
 	<img class="img-fluid" style="max-height:75vh" src="img/egg.png" alt="pet">
-
 </div>
 </div>
