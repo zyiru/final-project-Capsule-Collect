@@ -40,7 +40,15 @@ pets: { name: "bearwood", level: 1, growth: 50}
 
 ## Wireframes
 
-/ - home page for obtaining capsule from vending machine
+/login - page to login to your account
+
+![login](documentation/login)
+
+/register - page to register for new users
+
+![register](documentation/register)
+
+/home - home page for obtaining capsule from vending machine
 
 ![home](documentation/home.png)
 
@@ -80,7 +88,7 @@ pets: { name: "bearwood", level: 1, growth: 50}
     * I'm going to be using passport for user authentication
 * (2 points) CSS framework
     * use Bootstrap to implement to implement design framework
-* (2 points) Use connect-flash library
+* (1 points) Use connect-flash library
     * use flash messages for errors that occur during login and registration
 
 
@@ -88,6 +96,6 @@ pets: { name: "bearwood", level: 1, growth: 50}
 
 ## Annotations / References Used
 
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-
+1. [passport.js authentication docs](http://passportjs.org/docs)
+2. [tutorial on creating registration and login pages](https://www.youtube.com/watch?v=6FOq4cUdH8k)
 
