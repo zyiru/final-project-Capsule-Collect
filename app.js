@@ -47,7 +47,7 @@ app.use((req, res, next)=>{
     res.locals.msg = req.flash('msg');
     res.locals.error = req.flash('error');
     next();
-    });
+});
 
 const User = mongoose.model('User');
 
@@ -55,11 +55,11 @@ const User = mongoose.model('User');
 //register and login
 app.get('/', (req, res) => {
     res.render('welcome');
-    });
+});
 
 app.get('/register',(req,res)=>{
     res.render('register');
-    });
+});
 app.post('/register',(req,res)=>{
     // checking for and displaying errors when registering based off of:
     // https://github.com/bradtraversy/node_passport_login
@@ -68,19 +68,19 @@ app.post('/register',(req,res)=>{
 
     //check for errors
     if(!username || !password || !password2){
-    errors.push({msg: 'Please fill in all fields'});
+      errors.push({msg: 'Please fill in all fields'});
     }
     if(password !== password2){
-    errors.push({msg: 'Passwords do not match'});
+      errors.push({msg: 'Passwords do not match'});
     }
     if(password.length < 6){
-    errors.push({msg: 'Password should be at least 6 characters'});
+      errors.push({msg: 'Password should be at least 6 characters'});
     }
 
     if(errors.length > 0){
-    res.render('register', {errors});
+      res.render('register', {errors});
     }else{
-      User.findOne({username:username})
+      User.findOne({username:req.user.username})
         .then(user => {
             if(user){
             errors.push({msg:'Username already exists'});
@@ -92,7 +92,6 @@ app.post('/register',(req,res)=>{
                 const d = JSON.parse(data);
                 const newUser = new User({username:username, hash:password, coins:d.coins, pieces:d.pieces, toys:d.toys, pets:d.pets});
                 console.log('new user ',newUser);
-                /*** hash password ***/
 
                 //save new user
                 newUser.save()
@@ -110,20 +109,20 @@ app.post('/register',(req,res)=>{
 
 app.get('/login',(req,res)=>{
     res.render('login');
-    });
+});
 
 app.post('/login',(req, res, next)=>{
     passport.authenticate('local',{
-successRedirect: '/home',
-failureRedirect: '/login',
-failureFlash: true
+		  successRedirect: '/home',
+      failureRedirect: '/login',
+      failureFlash: true
 })(req, res, next);
-    });
+});
 
 //after loging in
 app.get('/home', ensureAuthenticated, (req, res) => {
     res.render('home',{user:req.user});
-    });
+});
 
 
 app.post('/home', ensureAuthenticated, (req, res)=>{

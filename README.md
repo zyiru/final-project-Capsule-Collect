@@ -42,11 +42,11 @@ pets: { name: "bearwood", level: 1, growth: 50}
 
 /login - page to login to your account
 
-![login](documentation/login)
+![login](documentation/login.png)
 
 /register - page to register for new users
 
-![register](documentation/register)
+![register](documentation/register.png)
 
 /home - home page for obtaining capsule from vending machine
 
