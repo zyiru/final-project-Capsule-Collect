@@ -17,27 +17,23 @@ function makeToy(btn){
     pg[0].appendChild(ele);
 //    setTimeout(()=> pg[0].removeChild(ele), 5000);
   }else{
-  console.log(toy.id);
+    //code based off
+    //https://developers.google.com/web/updates/2015/03/introduction-to-fetch
     fetch('/collection/pieces', {
       method:'POST', 
-      headers: {"Content-Type": "application/json"},
-      body: {name: toy.id}
+      headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+      body: `name=${toy.id}`
     })
-      .then(function(responses){return;})
-      .then((data)=>console.log(data))
-      .catch(function(error){console.log(error)});
-    fetch('/collection/pieces', {method:'GET'})
-      .then(function(response) {
-        if(response.ok) return;
-        throw new Error('Request failed');
-      })
       .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(error){console.log(error)});
         const ele = document.createElement('div');
         ele.classList.add('alert');
-        ele.classList.add('alert-info');
-        ele.innerHTML = 'You have successfully created ${data} toy';
+        ele.classList.add('alert-success');
+        ele.innerHTML = `You have successfully created ${toy.id} toy`;
         pg[0].appendChild(ele);
-      });
+      num[0].innerHTML = parseInt(num[0].innerHTML)-5;
   }
 }
 

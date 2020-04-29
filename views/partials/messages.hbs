@@ -1,12 +1,18 @@
-
 {{#each errors}}
+<div class='alert alert-danger'>
 <li>{{msg}}</li>
-{{/each}}
-
-{{#each msg}}
-<li>{{this}}</li>
+</div>
 {{/each}}
 
 {{#each error}}
+<div class='alert alert-danger'>
 <li>{{this}}</li>
+</div>
 {{/each}}
+
+{{#each msg}}
+<div class='alert alert-info'>
+<li>{{this}}</li>
+</div>
+{{/each}}
+

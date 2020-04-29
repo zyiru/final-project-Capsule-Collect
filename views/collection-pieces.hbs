@@ -2,11 +2,9 @@
 
 {{> navbar}}
 
-<div class="collection-nav">
-<ul>
-	<li><a href="/collection/pieces">Pieces</a></li>
-	<li><a href="/collection/toys">Toys</a></li>
-</ul>
+<div class="d-flex justify-content-center bg-light">
+	<a class="p-2" href="/collection/pieces">Pieces</a>
+	<a class="p-2" href="/collection/toys">Toys</a>
 </div>
 
 <div class="fivemsg">
@@ -25,7 +23,6 @@
 		<td class="name">{{name}}</td>
 		<td class="quantity">{{quantity}}</td>
 		<td><button type="button" class="btn btn-secondary combine" onClick="makeToy(this)">Combine</button></td>
-
 	</tr>
 	{{/each}}
 </table>

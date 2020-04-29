@@ -1,16 +1,14 @@
-<header class="fixed-top bg-light">
-<nav class="navbar navbar-default navbar-fixed-top">
-        <div class="nav navbar-nav"><a href="/home">HOME</a></div>
+<header class="fixed-top">
+<nav class="navbar navbar-dark bg-primary navbar-fixed-top navbar-collapse">
+        <div class="nav navbar-nav"><a class="nav-link" href="/home">HOME</a></div>
         <div class="nav navbar-nav navbar-right" id="coins"> Coins: {{user.coins}}</div>
 </nav>
 </header>
 
-<footer class="footer fixed-bottom bg-light">
-<nav class="navbar navbar-default navbar-fixed-top">
-        <ul class="nav navbar-nav list-inline">
-          <li class="list-inline-item"><a class="navbar-brand" href="/collection/pieces">Collection</a></li>
-          <li class="list-inline-item"><a class="navbar-brand" href="/yard">Yard</a></li>
-          <li class="list-inline-item"><a class="navbar-brand" href="/game">Game</a></li>
-        </ul>
+<footer class="footer d-flex fixed-bottom bg-primary text-light">
+<nav class="navbar navbar-dark navbar-fixed-top navbar-collapse">
+          <a class="navbar-brand nav-link" href="/collection/pieces">Collection</a>
+          <a class="navbar-brand nav-link" href="/yard">Yard</a>
+          <a class="navbar-brand nav-link" href="/game">Game</a>
 </nav>
 </footer>

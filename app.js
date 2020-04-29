@@ -140,24 +140,50 @@ app.get('/collection/pieces', ensureAuthenticated, (req,res) => {
 });
 
 app.post('/collection/pieces', ensureAuthenticated, (req, res)=>{
-  console.log("req body",req.body);
-  console.log('1 ',req.body.name);
-  console.log('2 ', req.query.name);
+    const toy = req.body.name;
+    User.updateOne({username:req.user.username, "pieces.name": toy, "toys.name":toy},{$inc: {"pieces.$.quantity":-5, "toys.$.quantity":1}}, (err, r)=>{});
 });
 
 app.get('/collection/toys', ensureAuthenticated, (req,res) => {
     res.render('collection-toys',{user: req.user});
+});
+
+app.post('/collection/toys', ensureAuthenticated, (req,res)=>{
+  const toy = req.body.name;
+  const growth = req.user.pets.growth;
+  if(growth >= 90){
+    User.updateOne({username:req.user.username, "toys.name":toy}, 
+    {$inc: {"toys.$.quantity":-1, "pets.level":1}},
+    {$set: {"pets.growth": 0}},(err,r)=>{
+      if(err) {res.status(500).json({success:false});}
+      else {res.json({success: true, result: r})}
     });
+  }else{
+    User.updateOne({username:req.user.username, "toys.name":toy},{$inc: {/*"toys.$.quantity":-1,*/ "pets.growth" :10}}, (err,r)=>{
+      if(err) {res.status(500).json({success:false});}
+      else {res.json({success: true, result: r})}
+    });
+  }
+});
 
 app.get('/game', ensureAuthenticated, (req, res)=>{
   res.render('game', {user: req.user}); 
 });
 
 app.post('/game', ensureAuthenticated, (req,res)=>{
-  User.updateOne({username:req.user.username}, {$inc: {"coins": 25}},(err,r)=>{});
+  User.updateOne({username:req.user.username}, {$inc: {"coins": 5}},(err,r)=>{
+    //res.redirect('/game');
+    if(err) {res.status(500).json({success:false});}
+    else {res.json({success: true, result: r})}
+  });
 });
-app.get('/coins', ensureAuthenticated, (req, res)=>{
-  res.send(req.user.coins);
+
+app.get('/yard', ensureAuthenticated, (req, res)=>{
+  res.render('yard', {user:req.user});
+});
+
+app.get('/user', ensureAuthenticated, (req, res)=>{
+  res.json(req.user);
 });
 
 app.listen(process.env.PORT || 3000);

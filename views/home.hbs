@@ -1,8 +1,7 @@
 {{> navbar}}
 
-<div class="row align-items-center">
-<div class="col-6">
-<img src="img/gashapon.png" alt="gashapon" style="width:250px;height:300px;">
+<div class="body text-center">
+<img class="img-fluid h-75" src="img/gashapon.png" alt="gashapon" style="width:250px;height:300px;">
 
 <div id="card">
 	<p>Click spin to get new piece</p>
@@ -11,10 +10,16 @@
 
 <form method="POST" action="/home">
 	<button id="spin" type="submit">Spin</button>
+
+        <div id = "p-msg" class="alert alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 </form>
 
-{{>messages}}
 
 </div>
+{{>messages}}
+
+<script src="../clientjs/spin.js"></script>
+
 </div>
-<!-- script src="../clientjs/spin.js"></script -->
+

@@ -1,22 +1,33 @@
-<h2> Collection: Toys</h2>
-
 {{> navbar}}
 
-<div class="collection-nav">
-<ul>
-	<li><a href="/collection/pieces">Pieces</a></li>
-	<li><a href="/collection/toys">Toys</a></li>
-</ul>
+
+<h2> Collection: Toys</h2>
+
+<div class="d-flex justify-content-center bg-light">
+	<a class="p-2" href="/collection/pieces">Pieces</a>
+	<a class="p-2" href="/collection/toys">Toys</a>
 </div>
 
+<div class="fivemsg">
+</div>
 
-<table>
-	{{#each user.toys}}
+<table class="table">
+	<thead>
 	<tr>
-		<td>{{name}}</td>
-		<td>{{quantity}}</td>
-		<td>Combine</td>
+		<th scope="col">Name</th>
+		<th scope="col">Quantity</th>
+		<th scope="col"></th>
+	</tr>
+	</thead>
+	{{#each user.toys}}
+	<tr id={{name}}>
+		<td class="name">{{name}}</td>
+		<td class="quantity">{{quantity}}</td>
+		<td><button type="button" class="btn btn-secondary feed" onClick="feed(this)">Feed</button></td>
+
 	</tr>
 	{{/each}}
 </table>
+
+<script src="../clientjs/feed.js"></script>
 

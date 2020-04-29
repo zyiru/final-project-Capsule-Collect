@@ -47,7 +47,7 @@ function end(result){
   res.classList.add('result');
   if(result === 'win'){
     updateData();
-    res.innerHTML = 'YOU WON!!! YOU GOT 25 COINS!!!';
+    res.innerHTML = 'YOU WON!!! YOU GOT 5 COINS!!!';
   }else{
     if(result === 'loss'){
       res.innerHTML = 'YOU LOST!';
@@ -62,6 +62,7 @@ function end(result){
   const paperMoves = document.getElementById('moves');
   paperMoves.classList.toggle('d-none');
   btn.addEventListener('click', replay);
+  setTimeout(getUserData, 200);
 }
 
 function replay(){
@@ -83,34 +84,22 @@ function updateData(){
   fetch('/game', {method: 'POST'})
     .then(function(responses){return;})
     .catch(function(error){console.log(error);});
-  fetch('/coins', {method: 'GET'})
-    .then(function(response) {
-      if(response.ok) return;
-      throw new Error('Request failed');
-    })
-    .then(function(data) {
-      console.log('get data: ',data);
-      document.getElementById('coins').innerHTML = `Coins: ${data.coins}`;
-    })
+}
+
+
+function getUserData(){
+  fetch('/user', {method: 'GET'})
+    .then(
+      function(response){
+        if(response.status >= 200 && response.status < 400){
+          response.json().then(function(data) {
+            document.getElementById('coins').innerHTML = `Coins: ${data.coins}`;
+          });
+        }
+      }
+    )
     .catch(function(error) {
       console.log(error);
     });
 }
-
-/*
-setInterval(function(){
-  fetch('/game', {method: 'GET'})
-    .then(function(response) {
-      if(response.ok) return;
-      throw new Error('Request failed');
-    })
-    .then(function(data) {
-      console.log(data);
-      document.getElementById('coins').innerHTML = `Coins: ${data.coins}`;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
-})*/
 
