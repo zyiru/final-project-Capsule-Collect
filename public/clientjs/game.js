@@ -3,8 +3,7 @@ function play(btn){
   div.classList.add('d-none');
   const cm = compMove();
   const pm = btn.id;
-  const result = compare(cm, pm);
-  end(result); 
+  compare(cm, pm, end);
 }
 
 function compMove(){
@@ -23,21 +22,21 @@ function compMove(){
   return cm;
 }
 
-function compare(cm, pm){
+function compare(cm, pm, end){
   if(pm === 'rock'){
     if(cm === 0)  return 'tie';
     else if(cm === 1) return 'loss';
     else{
-      return 'win';
+      end('win');
     }
   }else if(pm === 'paper'){
-    if(cm === 0) return 'win';
-    else if(cm === 1) return 'tie';
-    else return 'loss';
+    if(cm === 0) end('win');
+    else if(cm === 1) end('tie');
+    else end('loss');
   }else{
-    if(cm === 0) return 'loss';
-    else if(cm === 1) return 'win';
-    else return 'tie';
+    if(cm === 0) end('loss');
+    else if(cm === 1) end('win');
+    else end('tie');
   }
 }
 
@@ -56,6 +55,7 @@ function end(result){
       res.innerHTML = 'TIED';
     }
   }
+	
   game.appendChild(res);
   const btn = document.getElementById('replay');
   btn.classList.toggle('d-none');  
