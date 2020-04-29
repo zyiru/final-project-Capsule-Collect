@@ -3,9 +3,11 @@ function showImage(arr){
 		console.log(x);
 		const p = document.getElementById(x.name);
 		const icon = p.getElementsByClassName('icon');
+		const img = document.createElement('img');
+		icon[0].appendChild(img);
 		console.log(icon);
-		icon[0].setAttribute("src", x.img);
-		icon[0].setAttribute("style", "height:100px; width:100px");
+		img.setAttribute("src", x.img);
+		img.setAttribute("style", "height:50px; width:50px");
 	});
 }
 
