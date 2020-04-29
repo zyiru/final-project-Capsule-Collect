@@ -59,12 +59,13 @@ function end(result){
   paperMoves.classList.toggle('d-none');
   btn.addEventListener('click', replay);
   setTimeout(getUserData, 200);
+	console.log('end', result);
 }
 
 function compare(cm, pm, end){
   if(pm === 'rock'){
-    if(cm === 0)  return 'tie';
-    else if(cm === 1) return 'loss';
+    if(cm === 0)  end('tie');
+    else if(cm === 1) end('loss');
     else{
       end('win');
     }
@@ -84,12 +85,11 @@ function replay(){
   btn.classList.toggle('d-none');
   const move = document.querySelector('.move');
   const result = document.querySelector('.result');
-  console.log(result);
-  const game = move.parentNode;
+  const cm = move.parentNode;
   const paperMoves = document.getElementById('moves');
   paperMoves.classList.toggle('d-none');
-  game.removeChild(move);
-  game.removeChild(result);
+  cm.removeChild(move);
+  cm.removeChild(result);
   const div = document.querySelector('.playlabel');
   div.classList.toggle('d-none');
 }

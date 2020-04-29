@@ -126,12 +126,16 @@ app.get('/home', ensureAuthenticated, (req, res) => {
 
 
 app.post('/home', ensureAuthenticated, (req, res)=>{
+	if(req.user.coins < 10){
+		req.flash('error', 'You do not have enough coins. Play a game to earn more.');
+	}else{
     User.aggregate([{$match: {username:req.user.username}}, {"$unwind":"$pieces"},{$sample:{size:1}}], (err, result)=>{
         User.updateOne({username:req.user.username, "pieces.name":result[0].pieces.name}, {$inc: {"pieces.$.quantity": 1, "coins": -10}}, (err, r)=>{
             req.flash('msg',`You got a ${result[0].pieces.name} piece`);
             res.redirect('/home');
 					});
 		});
+		}
 });
 
 app.get('/collection/pieces', ensureAuthenticated, (req,res) => {
